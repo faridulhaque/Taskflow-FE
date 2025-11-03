@@ -169,7 +169,7 @@ export default function TaskList() {
             <div className="flex justify-center items-center">
               <div className="w-full h-3 bg-[#385682] rounded-full overflow-hidden">
                 <div
-                  className="h-full rounded-full transition-all duration-500"
+                  className="h-full rounded-full transition-all duration-1200"
                   style={{ width: `${progress}%`, backgroundColor: "#3B82F6" }}
                 ></div>
               </div>

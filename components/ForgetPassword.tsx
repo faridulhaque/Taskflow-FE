@@ -1,14 +1,42 @@
 "use client";
+import { useForgotPasswordMutation } from "@/services/queries/authApi";
+import { ForgotPasswordType } from "@/services/types";
 import { Noto_Serif } from "next/font/google";
 import Image from "next/image";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import React from "react";
+import { toast } from "react-toastify";
 const notoSerif = Noto_Serif({
   subsets: ["latin"],
   weight: ["400", "600", "700"],
 });
 
 function ForgetPassword() {
+  const router = useRouter();
+  const [sendCode, { isLoading: sendingCode }] = useForgotPasswordMutation();
+
+  const handleSubmit = async (e: any) => {
+    e.preventDefault();
+    const email = e.target.email.value;
+    if (!email) toast.error("Email is required");
+
+    const data: ForgotPasswordType = {
+      email,
+    };
+
+    try {
+      const result: any = await sendCode(data);
+
+      if (result?.data?.data?.email) {
+        toast.success(`An email has been send with recovery code`);
+        router.push(`/recover-password?email=${result?.data?.data?.email}`);
+      }
+    } catch (error) {
+      toast.error("Failed to send verification code");
+    }
+  };
+
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 gap-16 w-11/12 mx-auto pt-20 pb-10">
       <div className="flex flex-col justify-start h-full space-y-6  md:pt-0 pt-10">
@@ -44,19 +72,23 @@ function ForgetPassword() {
           </p>
         </div>
 
-        <form className="w-full max-w-md space-y-5 mt-4">
+        <form
+          onSubmit={handleSubmit}
+          className="w-full max-w-md space-y-5 mt-4"
+        >
           <div>
             <label className="block text-white text-sm mb-2">Email</label>
             <input
               type="email"
               name="email"
+              required
               placeholder="Enter your email"
               className="w-full h-12 rounded-lg bg-[#F5F7FA] border border-[#6B6B6B] px-4 outline-0"
             />
           </div>
 
           <button
-            type="button"
+            type="submit"
             className="w-full h-12 bg-[#3B82F6] text-white rounded-md text-lg font-medium hover:bg-[#2563EB] transition"
           >
             Recover Password

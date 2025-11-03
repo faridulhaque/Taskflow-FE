@@ -1,5 +1,10 @@
 import { apiSlice } from "../apiSlice";
-import { signInPayload, signUpPayload } from "../types";
+import {
+  ForgotPasswordType,
+  RecoverPasswordType,
+  signInPayload,
+  signUpPayload,
+} from "../types";
 
 const authApi = apiSlice.injectEndpoints({
   endpoints: (builder: any) => ({
@@ -18,8 +23,29 @@ const authApi = apiSlice.injectEndpoints({
         body: data,
       }),
     }),
+
+    forgotPassword: builder.mutation({
+      query: (data: ForgotPasswordType) => ({
+        url: "/auth/forgot-password",
+        method: "POST",
+        body: data,
+      }),
+    }),
+
+    recoverPassword: builder.mutation({
+      query: (data: RecoverPasswordType) => ({
+        url: "/auth/recover-password",
+        method: "POST",
+        body: data,
+      }),
+    }),
   }),
   // overrideExisting: true,
 });
 
-export const { useRegisterMutation, useLoginMutation } = authApi;
+export const {
+  useRegisterMutation,
+  useLoginMutation,
+  useForgotPasswordMutation,
+  useRecoverPasswordMutation,
+} = authApi;

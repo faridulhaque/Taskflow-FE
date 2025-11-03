@@ -22,3 +22,13 @@ export type AddTaskType = {
   date: string;
   time: string;
 };
+
+export type ForgotPasswordType = {
+  email: string;
+};
+
+export type RecoverPasswordType = {
+  email: string;
+  code: number;
+  password: string;
+};
