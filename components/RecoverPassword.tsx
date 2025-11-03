@@ -64,7 +64,8 @@ function RecoverPassword() {
           Set New Password
         </h2>
         <p className="pt-4 pb-8 text-center text-lg text-[#F8FAFC]">
-          Verify code and set a new password
+          Verify code and set a new password. Check your spam folder if you
+          don't see the email
         </p>
         <form
           onSubmit={handleSubmit}
