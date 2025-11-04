@@ -1,6 +1,7 @@
 import { apiSlice } from "../apiSlice";
 import {
   ForgotPasswordType,
+  GOnboardingPayload,
   RecoverPasswordType,
   signInPayload,
   signUpPayload,
@@ -39,6 +40,14 @@ const authApi = apiSlice.injectEndpoints({
         body: data,
       }),
     }),
+
+    googleOnboarding: builder.mutation({
+      query: (data: GOnboardingPayload) => ({
+        url: "/auth/g-onboarding",
+        method: "POST",
+        body: data,
+      }),
+    }),
   }),
   // overrideExisting: true,
 });
@@ -48,4 +57,5 @@ export const {
   useLoginMutation,
   useForgotPasswordMutation,
   useRecoverPasswordMutation,
+  useGoogleOnboardingMutation,
 } = authApi;

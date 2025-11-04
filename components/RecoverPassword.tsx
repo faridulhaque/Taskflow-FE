@@ -18,13 +18,15 @@ function RecoverPassword() {
   const [showPass2, setShowPass2] = useState(false);
 
   const [recover, { isLoading: recovering }] = useRecoverPasswordMutation();
-  const params = useSearchParams();
+  const searchParams = useSearchParams();
   const router = useRouter();
+
   const handleSubmit = async (e: any) => {
+    e.preventDefault();
     const password = e.target.password.value;
     const confirmPassword = e.target.confirmPassword.value;
-    const code = e.target.code.value;
-    const email = (params as any).email;
+    const code = Number(e.target.code.value);
+    const email = searchParams.get("email") as string;
 
     if (password !== confirmPassword)
       return toast.error("Password must be the same");
@@ -40,36 +42,40 @@ function RecoverPassword() {
 
     for (const key in data) {
       if (!data[key as keyof typeof data]) {
-        toast.error(`${key} is required`);
+        return toast.error(`${key} is required`);
       }
     }
     try {
       const result: any = await recover(data);
+      console.log("resutl for recover password", result);
 
       if (result?.data?.data) {
         toast.success(`Password reset successful`);
         router.push(`/sign-in`);
       }
     } catch (error) {
+      console.log("reset password error", error);
       toast.error("Failed to reset password");
     }
   };
 
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 items-center gap-16 w-11/12 mx-auto pt-10 pb-10">
-      <div className="flex flex-col justify-center h-full">
+      <div className="flex flex-col justify-start h-full md:pl-10">
         <h2
-          className={`text-5xl md:text-6xl text-[#F8FAFC] text-center font-light tracking-wide ${notoSerif.className}`}
+          className={`text-5xl md:text-6xl text-[#F8FAFC] text-left font-light tracking-wide ${notoSerif.className}`}
         >
           Set New Password
         </h2>
-        <p className="pt-4 pb-8 text-center text-lg text-[#F8FAFC]">
+
+        <p className="pt-4 pb-8 text-left text-lg text-[#F8FAFC] max-w-md">
           Verify code and set a new password. Check your spam folder if you
-          don't see the email
+          don't see the email.
         </p>
+
         <form
           onSubmit={handleSubmit}
-          className="mx-auto w-full max-w-md space-y-5"
+          className="w-full max-w-md space-y-5 text-left"
         >
           <div>
             <label className="block text-white text-sm mb-2">
@@ -191,22 +197,23 @@ function RecoverPassword() {
 
           <button
             type="submit"
+            disabled={recovering}
             className="cursor-pointer w-full h-12 bg-[#3B82F6] text-white rounded-md text-lg font-medium hover:bg-[#2563EB] transition"
           >
             Set Password
           </button>
         </form>
 
-        <h2 className="text-center text-[#F5F7FA] text-base mt-6">
+        <h2 className="text-left text-[#F5F7FA] text-base mt-6">
           <Link className="text-[#94A3B8] hover:underline" href="/sign-in">
             Back to Login
           </Link>
         </h2>
       </div>
 
-      <div className="h-[500px] md:h-[600px]">
+      <div className="h-[500px] md:h-[600px] flex justify-center items-start">
         <Image
-          className="w-full h-full object-contain"
+          className="w-4/5 h-full object-contain"
           src="/rec-pass.png"
           alt="recover pass"
           width={300}

@@ -21,7 +21,7 @@ function Entry() {
 
     for (const key in payload) {
       if (!payload[key as keyof typeof payload]) {
-        toast.error(`${key} is required`);
+        return toast.error(`${key} is required`);
       }
     }
     try {
@@ -31,7 +31,7 @@ function Entry() {
       }
     } catch (error) {
       console.log("error", error);
-      toast.error("Failed to create a task");
+      return toast.error("Failed to create a task");
     }
   };
 

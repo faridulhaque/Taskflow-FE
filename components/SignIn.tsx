@@ -1,5 +1,9 @@
 "use client";
-import { useLoginMutation } from "@/services/queries/authApi";
+import { signInWithGoogle } from "@/services/firebase.config";
+import {
+  useGoogleOnboardingMutation,
+  useLoginMutation,
+} from "@/services/queries/authApi";
 import { signInPayload } from "@/services/types";
 import { Noto_Serif } from "next/font/google";
 import Image from "next/image";
@@ -15,7 +19,8 @@ const notoSerif = Noto_Serif({
 function SignIn() {
   const router = useRouter();
   const [showPassword, setShowPassword] = useState(false);
-  const [login] = useLoginMutation<any>();
+  const [login, { isLoading: loggingIn }] = useLoginMutation<any>();
+  const [onboardGoogleUser] = useGoogleOnboardingMutation<any>();
 
   const handleSubmit = async (e: any) => {
     e.preventDefault();
@@ -32,7 +37,7 @@ function SignIn() {
 
     for (const key in payload) {
       const value = payload[key as keyof typeof payload];
-      if (!value) toast.warn(`${key} is required`);
+      if (!value) return toast.warn(`${key} is required`);
     }
 
     try {
@@ -46,6 +51,23 @@ function SignIn() {
       }
     } catch (error) {
       toast.error(`Failed to Sign Up`);
+    }
+  };
+
+  const handleGoogleSignIn = async () => {
+    const result = await signInWithGoogle();
+    const email = result?.user?.email;
+    const name = result?.user?.displayName;
+    const res: any = await onboardGoogleUser({
+      name,
+      email,
+    });
+    if (res?.data?.token) {
+      localStorage.setItem("token", res.data.token);
+
+      toast.success(res?.data?.data?.message);
+
+      router.push("/");
     }
   };
 
@@ -140,12 +162,14 @@ function SignIn() {
             </Link>
           </div>
           <button
+            disabled={loggingIn}
             type="submit"
             className="cursor-pointer w-full h-12 bg-[#3B82F6] text-white rounded-md text-lg font-medium hover:bg-[#2563EB] transition"
           >
             Login
           </button>
           <button
+            onClick={handleGoogleSignIn}
             type="button"
             className="cursor-pointer w-full flex items-center justify-center h-12 rounded-md bg-white mt-4 space-x-3 hover:bg-gray-100 transition"
           >

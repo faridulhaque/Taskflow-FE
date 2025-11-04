@@ -8,6 +8,11 @@ export type signUpPayload = {
   password: string;
   name: string;
 };
+export type GOnboardingPayload = {
+  email: string;
+  name: string;
+};
+
 export type TaskPayload = {
   _id: string;
   email: string;

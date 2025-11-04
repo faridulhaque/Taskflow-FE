@@ -19,7 +19,7 @@ function ForgetPassword() {
   const handleSubmit = async (e: any) => {
     e.preventDefault();
     const email = e.target.email.value;
-    if (!email) toast.error("Email is required");
+    if (!email) return toast.error("Email is required");
 
     const data: ForgotPasswordType = {
       email,
@@ -88,8 +88,9 @@ function ForgetPassword() {
           </div>
 
           <button
+            disabled={sendingCode}
             type="submit"
-            className="w-full h-12 bg-[#3B82F6] text-white rounded-md text-lg font-medium hover:bg-[#2563EB] transition"
+            className="cursor-pointer w-full h-12 bg-[#3B82F6] text-white rounded-md text-lg font-medium hover:bg-[#2563EB] transition"
           >
             Recover Password
           </button>
