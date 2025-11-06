@@ -1,6 +1,6 @@
 # 🗂️ Task Flow
 ## 🎥 Demo
-[![Watch the demo](public/demo-thumbnail.png)](https://www.loom.com/share/2cf921599b7c4f37af09c2c34bbfd582)
+[![Watch the demo](public/taskflow-ss.png)](https://www.loom.com/share/2cf921599b7c4f37af09c2c34bbfd582)
 
 **Live Link:** https://taskflow-fe-five.vercel.app/  
 **Backend Repository:** https://github.com/faridulhaque/Taskflow-BE
