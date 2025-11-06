@@ -53,23 +53,25 @@ Password: `test@faridmurshed.dev`
 
 3. **Create a .env.local file and add your Firebase config:**
 
-NEXT_PUBLIC_BASE_URL=
-NEXT_PUBLIC_FIREBASE_API_KEY=
-NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN=
-NEXT_PUBLIC_FIREBASE_PROJECT_ID=
-NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET=
-NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID=
-NEXT_PUBLIC_FIREBASE_APP_ID=
+```env
+    NEXT_PUBLIC_BASE_URL=
+    NEXT_PUBLIC_FIREBASE_API_KEY=
+    NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN=
+    NEXT_PUBLIC_FIREBASE_PROJECT_ID=
+    NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET=
+    NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID=
+    NEXT_PUBLIC_FIREBASE_APP_ID=
+
 
 
 4. **Run the development server**
 
-npm run dev
+    npm run dev
 
 
 5. **Open in browser**
 
-http://localhost:3000
+    http://localhost:3000
 
 🧑‍🤝‍🧑 Author
 
