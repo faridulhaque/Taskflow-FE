@@ -29,7 +29,7 @@ function ForgetPassword() {
       const result: any = await sendCode(data);
 
       if (result?.data?.data?.email) {
-        toast.success(`An email has been send with recovery code`);
+        toast.success(`An email has been sent with recovery code`);
         router.push(`/recover-password?email=${result?.data?.data?.email}`);
       }
     } catch (error) {
