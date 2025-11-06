@@ -1,37 +1,81 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🗂️ Task Flow
+**Live Demo:** https://taskflow-fe-five.vercel.app/  
+**Backend Repository:** https://github.com/faridulhaque/Taskflow-BE
 
-## Getting Started
+## 🚀 Overview
+**Task Flow** is a modern task management web application built to demonstrate my full-stack development skills. It showcases secure authentication, real-time data handling, and a clean, responsive UI using modern web technologies.
 
-First, run the development server:
+## 🧩 Features
+- 🔐 **Login / Signup** using Email & Password or Google  
+- 🔁 **Password Reset** via email  
+- 🗓️ **Add Tasks** with date and time  
+- 🕵️ **Search Tasks** quickly  
+- 🔄 **Update Task Status** (e.g., completed, pending)  
+- ❌ **Delete Tasks** anytime  
 
-```bash
+## 🚧 Future Improvements
+- Add task categories and labels  
+- Enable task sharing between users  
+- Add calendar view for due dates  
+- Implement push notifications
+
+
+## 🧰 Tech Stack
+
+### Frontend
+- Next.js  
+- TypeScript  
+- Tailwind CSS  
+- Firebase Authentication
+
+### Backend
+- Node.js  
+- Express.js (with Mongoose / MongoDB)  
+- Mailjet (for password reset emails)
+
+## 🧑‍💻 Test Credentials
+You can try the live app using the following credentials:
+
+Email: `test@faridmurshed.dev`  
+Password: `test@faridmurshed.dev`
+
+## ⚙️ Installation (Local Setup)
+
+1. **Clone the repository**
+   ```bash
+   git clone https://github.com/faridulhaque/Taskflow-FE.git
+   cd taskflow-fe
+
+2. **Install dependencies**
+
+    npm install
+
+
+3. **Create a .env.local file and add your Firebase config:**
+
+NEXT_PUBLIC_BASE_URL=
+NEXT_PUBLIC_FIREBASE_API_KEY=
+NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN=
+NEXT_PUBLIC_FIREBASE_PROJECT_ID=
+NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET=
+NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID=
+NEXT_PUBLIC_FIREBASE_APP_ID=
+
+
+4. **Run the development server**
+
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+5. **Open in browser**
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+http://localhost:3000
 
-## Learn More
+🧑‍🤝‍🧑 Author
 
-To learn more about Next.js, take a look at the following resources:
+Faridul Haque Murshed
+https://github.com/faridulhaque
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
-# Taskflow-BE
+⭐ Please star this repo if you like it!
