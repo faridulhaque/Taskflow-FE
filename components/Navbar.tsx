@@ -42,6 +42,14 @@ function Navbar() {
             Add Task
           </button>
         )}
+        {isEntry && (
+          <button
+            onClick={() => router.push("/")}
+            className="bg-[#3B82F6] hover:bg-[#2563EB] text-white font-medium py-1.5 md:py-2 px-4 md:px-6 rounded-md text-sm md:text-base transition cursor-pointer"
+          >
+            View Tasks
+          </button>
+        )}
 
         {(isHome || isEntry) && (
           <svg

@@ -141,14 +141,14 @@ export default function TaskList() {
                     ></div>
                     <div>
                       <p
-                        className={`text-md text-black ${
+                        className={`text-md text-black capitalize ${
                           task.complete ? "line-through text-gray-500" : ""
                         }`}
                       >
                         {task.title}
                       </p>
                       <p className="text-sm text-gray-500 mt-1">
-                        {task.time} • {task.date}
+                        {task?.time} • {taskFilter === 1 ? "Today" : task?.date}
                       </p>
                     </div>
                   </div>
@@ -164,17 +164,24 @@ export default function TaskList() {
             )}
           </div>
 
-          <div className="w-full md:w-2/3 lg:w-2/5 bg-white rounded-md shadow-sm p-4">
-            <h2 className="text-lg font-medium text-black mb-3">Progress</h2>
-            <div className="flex justify-center items-center">
-              <div className="w-full h-3 bg-[#385682] rounded-full overflow-hidden">
-                <div
-                  className="h-full rounded-full transition-all duration-1200"
-                  style={{ width: `${progress}%`, backgroundColor: "#3B82F6" }}
-                ></div>
+          {searchParam ? (
+            <div></div>
+          ) : (
+            <div className="w-full md:w-2/3 lg:w-2/5 bg-white rounded-md shadow-sm p-4">
+              <h2 className="text-lg font-medium text-black mb-3">Progress</h2>
+              <div className="flex justify-center items-center">
+                <div className="w-full h-3 bg-[#385682] rounded-full overflow-hidden">
+                  <div
+                    className="h-full rounded-full transition-all duration-1200"
+                    style={{
+                      width: `${progress}%`,
+                      backgroundColor: "#3B82F6",
+                    }}
+                  ></div>
+                </div>
               </div>
             </div>
-          </div>
+          )}
         </>
       )}
     </div>
