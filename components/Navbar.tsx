@@ -14,8 +14,10 @@ function Navbar() {
 
   const handleLogout = () => {
     localStorage.removeItem("token");
-    dispatch(apiSlice.util.resetApiState());
     router.push("/sign-in");
+    setTimeout(() => {
+      dispatch(apiSlice.util.resetApiState());
+    }, 100);
   };
   return (
     <div className="w-full h-20 shadow-xs shadow-[#3B82F6] flex items-center justify-between px-4 md:px-10">
