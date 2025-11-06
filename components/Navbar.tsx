@@ -1,19 +1,22 @@
 "use client";
+import { apiSlice } from "@/services/apiSlice";
 import Image from "next/image";
 import { usePathname, useRouter } from "next/navigation";
 import React from "react";
+import { useDispatch } from "react-redux";
 
 function Navbar() {
   const router = useRouter();
   const pathname = usePathname();
   const isHome = pathname === "/" ? true : false;
   const isEntry = pathname === "/entry" ? true : false;
+  const dispatch = useDispatch();
 
   const handleLogout = () => {
     localStorage.removeItem("token");
+    dispatch(apiSlice.util.resetApiState());
     router.push("/sign-in");
   };
-
   return (
     <div className="w-full h-20 shadow-xs shadow-[#3B82F6] flex items-center justify-between px-4 md:px-10">
       <div
