@@ -17,7 +17,6 @@ export default function TaskList() {
   const [searchParam, setSearchParam] = useState("");
   const [tasks, setTasks] = useState<TaskPayload[]>([]);
   const [progress, setProgress] = useState(0);
-  const [token, setToken] = useState<string | null>(null);
 
   const router = useRouter();
 
@@ -26,16 +25,16 @@ export default function TaskList() {
 
   const { data: archivedTasks, isLoading: atLoading } = useGetArchiveTasksQuery(
     "",
-    { skip: taskFilter !== 0 || !token }
+    { skip: taskFilter !== 0 }
   );
 
   const { data: todayTasks, isLoading: ttLoading } = useGetTodayTaskQuery("", {
-    skip: taskFilter !== 1 || !token,
+    skip: taskFilter !== 1,
   });
 
   const { data: upcomingTasks, isLoading: uTasksLoading } =
     useGetUpcomingTasksQuery("", {
-      skip: taskFilter !== 2 || !token,
+      skip: taskFilter !== 2,
     });
 
   useEffect(() => {
@@ -62,13 +61,6 @@ export default function TaskList() {
     setProgress(Math.round(percent));
   }, [searchParam, taskFilter, todayTasks, upcomingTasks, archivedTasks]);
 
-  useEffect(() => {
-    const savedToken = localStorage.getItem("token");
-    if (savedToken) {
-      setToken(savedToken);
-    }
-  }, []);
-
   const handleDelete = async (id: string) => {
     try {
       await deleteTask(id).unwrap();
@@ -88,7 +80,7 @@ export default function TaskList() {
       toast.error("Failed to update task status");
     }
   };
-  const loading = ttLoading || uTasksLoading || atLoading || !token;
+  const loading = ttLoading || uTasksLoading || atLoading
 
   // console.log("progress", progress);
   return (
