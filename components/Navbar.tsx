@@ -9,7 +9,7 @@ function Navbar() {
   const router = useRouter();
   const pathname = usePathname();
   const isHome = pathname === "/" ? true : false;
-  const isEntry = pathname === "/entry" ? true : false;
+  const isEntry = pathname === "/entry" || "/edit" ? true : false;
   const dispatch = useDispatch();
 
   const handleLogout = () => {

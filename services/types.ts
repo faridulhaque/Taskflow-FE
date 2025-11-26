@@ -22,6 +22,16 @@ export type TaskPayload = {
   complete: boolean;
 };
 
+export type UTaskPayload = Omit<
+  TaskPayload,
+  "_id" | "description" | "complete" | "email"
+>;
+
+export type UpdateArgs = {
+  id: string;
+  payload: UTaskPayload;
+};
+
 export type AddTaskType = {
   title: string;
   date: string;

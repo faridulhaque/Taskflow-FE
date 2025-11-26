@@ -1,5 +1,5 @@
 import { apiSlice } from "../apiSlice";
-import { TaskPayload } from "../types";
+import { TaskPayload, UpdateArgs, UTaskPayload } from "../types";
 
 const othersApi = apiSlice.injectEndpoints({
   endpoints: (builder: any) => ({
@@ -56,6 +56,25 @@ const othersApi = apiSlice.injectEndpoints({
       },
       invalidatesTags: ["tasks"],
     }),
+
+    getOneTask: builder.query({
+      query: (id: string) => {
+        return {
+          url: `/tasks/one/${id}`,
+          method: "GET",
+        };
+      },
+      providesTags: ["tasks"],
+    }),
+
+    updateTask: builder.mutation({
+      query: ({ id, payload }: UpdateArgs) => ({
+        url: `/tasks/update/${id}`,
+        method: "PUT",
+        body: payload,
+      }),
+      invalidatesTags: ["tasks"],
+    }),
   }),
 
   overrideExisting: true,
@@ -68,4 +87,6 @@ export const {
   useGetArchiveTasksQuery,
   useDeleteTaskMutation,
   useChangeStatusMutation,
+  useGetOneTaskQuery,
+  useUpdateTaskMutation,
 } = othersApi;

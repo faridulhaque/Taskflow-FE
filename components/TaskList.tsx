@@ -10,6 +10,7 @@ import React, { useEffect, useState } from "react";
 import { TaskPayload } from "@/services/types";
 import { toast } from "react-toastify";
 import Loading from "./Loading";
+import { useRouter } from "next/navigation";
 
 export default function TaskList() {
   const [taskFilter, setTaskFilter] = useState(1);
@@ -17,6 +18,8 @@ export default function TaskList() {
   const [tasks, setTasks] = useState<TaskPayload[]>([]);
   const [progress, setProgress] = useState(0);
   const [token, setToken] = useState<string | null>(null);
+
+  const router = useRouter();
 
   const [deleteTask, { isLoading: deleting }] = useDeleteTaskMutation();
   const [changeStatus, { isLoading: changing }] = useChangeStatusMutation();
@@ -160,13 +163,36 @@ export default function TaskList() {
                       </p>
                     </div>
                   </div>
-                  <button
-                    onClick={() => handleDelete(task?._id)}
-                    disabled={deleting}
-                    className="text-red-500 text-lg font-semibold hover:text-red-600 transition cursor-pointer"
-                  >
-                    ✕
-                  </button>
+
+                  <div className="flex items-center space-x-3">
+                    <button
+                      onClick={() => router.push(`/edit/${task?._id}`)}
+                      className="mr-5 text-gray-600 text-lg hover:text-gray-800 transition cursor-pointer"
+                    >
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        strokeWidth={1.5}
+                        stroke="currentColor"
+                        className="size-5"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          d="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L6.832 19.82a4.5 4.5 0 0 1-1.897 1.13l-2.685.8.8-2.685a4.5 4.5 0 0 1 1.13-1.897L16.863 4.487Zm0 0L19.5 7.125"
+                        />
+                      </svg>
+                    </button>
+
+                    <button
+                      onClick={() => handleDelete(task?._id)}
+                      disabled={deleting}
+                      className="text-red-500 text-lg font-semibold hover:text-red-600 transition cursor-pointer"
+                    >
+                      ✕
+                    </button>
+                  </div>
                 </div>
               ))
             )}
