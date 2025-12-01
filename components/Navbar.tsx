@@ -8,8 +8,9 @@ import { useDispatch } from "react-redux";
 function Navbar() {
   const router = useRouter();
   const pathname = usePathname();
-  const isHome = pathname === "/" ? true : false;
-  const isEntry = pathname === "/entry" || "/edit" ? true : false;
+  const isHome = pathname === "/";
+  const isEntry = pathname === "/entry" || pathname === "/edit";
+  const isOthers = !isHome || !isEntry;
   const dispatch = useDispatch();
 
   const handleLogout = () => {
